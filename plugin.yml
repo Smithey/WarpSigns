@@ -1,0 +1,6 @@
+name: WarpSigns
+main: me.smithey.can.code.WarpSigns
+version: 3.0
+description: This is a plugin that adds signs you can click to use warps.
+author: Smithey
+commands:
