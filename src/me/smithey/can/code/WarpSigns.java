@@ -19,6 +19,7 @@ public class WarpSigns extends JavaPlugin implements Listener {
 
 	public void onEnable() {
 		getServer().getPluginManager().registerEvents(this, this);
+		Updater updater = new Updater(this, "warpsigns", this.getFile(), Updater.UpdateType.DEFAULT, false);
 		try {
 			Metrics metrics = new Metrics(this);
 			metrics.start();
