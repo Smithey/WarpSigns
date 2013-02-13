@@ -17,9 +17,14 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class WarpSigns extends JavaPlugin implements Listener {
 
+	YamlConfiguration cfg = YamlConfiguration.loadConfiguration(new File("plugins/WarpSigns/config.yml"));
+
 	public void onEnable() {
 		getServer().getPluginManager().registerEvents(this, this);
-		Updater updater = new Updater(this, "warpsigns", this.getFile(), Updater.UpdateType.DEFAULT, false);
+		createConfig();
+		if(cfg.getBoolean("auto-update") == true) {
+			Updater updater = new Updater(this, "warpsigns", this.getFile(), Updater.UpdateType.DEFAULT, false);
+		} else {}
 		try {
 			Metrics metrics = new Metrics(this);
 			metrics.start();
@@ -79,7 +84,7 @@ public class WarpSigns extends JavaPlugin implements Listener {
 
 	public void createConfig() { // Generate config
 		YamlConfiguration config = YamlConfiguration.loadConfiguration(new File("plugins/WarpSigns/config.yml"));
-		config.set("Enable Per Sign Permission", "true");
+		config.set("auto-update", true);
 		try {
 			config.save("plugins/WarpSigns/config.yml");
 		} catch (IOException e) {
