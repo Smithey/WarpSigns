@@ -16,6 +16,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class WarpSigns extends JavaPlugin implements Listener {
+
 	public void onEnable() {
 		getServer().getPluginManager().registerEvents(this, this);
 		try {
