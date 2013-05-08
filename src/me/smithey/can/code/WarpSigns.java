@@ -1,3 +1,16 @@
+/**
+ * Sign format!
+ * 
+ * getLine(0) returns line #1
+ * getLine(1) returns line #2
+ * getLine(2) returns line #3
+ * getLine(3) returns line #4
+ * 
+ * Any other getLine after that will result in an ArrayOutOfBoundsException
+ * 
+ *0*/
+
+
 package me.smithey.can.code;
 
 import java.io.File;
@@ -44,11 +57,10 @@ public class WarpSigns extends JavaPlugin implements Listener {
 					p.sendMessage(ChatColor.RED + "Please enter a warp name on line 2!");
 					e.setCancelled(true);
 				} else {
-					e.setLine(0, "§1[Warp]");
+					e.setLine(0, "ï¿½1[Warp]");
 					p.sendMessage(ChatColor.GREEN + "WarpSign Created");
 				}
 			}else{
-				p.sendMessage("Debug: No perm for warpsigns.create");
 				p.sendMessage(ChatColor.RED + "You don't have Permission to create a WarpSign");
 				e.setCancelled(true);
 			}
@@ -59,9 +71,9 @@ public class WarpSigns extends JavaPlugin implements Listener {
 		if (ev.getAction() == Action.RIGHT_CLICK_BLOCK) {
 			Block b = ev.getClickedBlock();
 			if ((b.getType() == Material.SIGN_POST) || (b.getType() == Material.WALL_SIGN)) {
-				Sign s = (Sign)b.getState();
+				Sign s = (Sign) b.getState();
 				Player p = ev.getPlayer();
-				if (s.getLine(0).equalsIgnoreCase("§1[Warp]")){
+				if (s.getLine(0).equalsIgnoreCase("ï¿½1[Warp]")){
 					if(s.getLine(3).startsWith("{") && s.getLine(3).endsWith("}")) { // Detects if they want to use per sign permission
 						String perm = s.getLine(3).replace("{", ""); // Removes {
 						String fperm = perm.replace("}", ""); // Removes }
@@ -84,11 +96,16 @@ public class WarpSigns extends JavaPlugin implements Listener {
 
 	public void createConfig() { // Generate config
 		YamlConfiguration config = YamlConfiguration.loadConfiguration(new File("plugins/WarpSigns/config.yml"));
+		File f = new File("plugins/WarpSigns/config.yml");
+		if(!f.exists()) {
 		config.set("auto-update", true);
 		try {
 			config.save("plugins/WarpSigns/config.yml");
 		} catch (IOException e) {
 			e.printStackTrace();
+			}
+		} else {
+			//do nothing
 		}
 	}
 }
