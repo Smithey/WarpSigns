@@ -57,7 +57,7 @@ public class WarpSigns extends JavaPlugin implements Listener {
 					p.sendMessage(ChatColor.RED + "Please enter a warp name on line 2!");
 					e.setCancelled(true);
 				} else {
-					e.setLine(0, "�1[Warp]");
+					e.setLine(0, ChatColor.GREEN + "[Warp]"; // revert to using chatcolor rather than ampisan.
 					p.sendMessage(ChatColor.GREEN + "WarpSign Created");
 				}
 			}else{
@@ -73,7 +73,7 @@ public class WarpSigns extends JavaPlugin implements Listener {
 			if ((b.getType() == Material.SIGN_POST) || (b.getType() == Material.WALL_SIGN)) {
 				Sign s = (Sign) b.getState();
 				Player p = ev.getPlayer();
-				if (s.getLine(0).equalsIgnoreCase("�1[Warp]")){
+				if (s.getLine(0).equalsIgnoreCase(ChatColor.GREEN + "[Warp]")) { // this will work? no?
 					if(s.getLine(3).startsWith("{") && s.getLine(3).endsWith("}")) { // Detects if they want to use per sign permission
 						String perm = s.getLine(3).replace("{", ""); // Removes {
 						String fperm = perm.replace("}", ""); // Removes }
